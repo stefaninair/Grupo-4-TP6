@@ -1,4 +1,4 @@
-package Vistas;
+package Iconos;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,6 +12,8 @@ import Clases.Categoria;
 import Clases.CategoriaData;
 import Clases.Producto;
 import Clases.ProductoData;
+import java.awt.Color;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -53,14 +55,14 @@ private DefaultTableModel modelo;
         jTProductos = new javax.swing.JTable();
         jdSalir = new java.awt.Button();
         jPanel2 = new javax.swing.JPanel();
-        jcbCategorias = new javax.swing.JComboBox<>();
         jbAgregar = new javax.swing.JButton();
-        jtfNombre = new java.awt.TextField();
-        jtfPrecio = new java.awt.TextField();
         jLabel1 = new javax.swing.JLabel();
+        jcbCategorias = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jtfPrecio = new java.awt.TextField();
         jLabel5 = new javax.swing.JLabel();
+        jtfNombre = new java.awt.TextField();
         jsStock = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
 
@@ -104,6 +106,11 @@ private DefaultTableModel modelo;
         jdSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jdSalir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jdSalir.setLabel("Salir");
+        jdSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jdSalirMouseEntered(evt);
+            }
+        });
         jdSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jdSalirActionPerformed(evt);
@@ -112,6 +119,18 @@ private DefaultTableModel modelo;
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
+        jbAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/icons8-carrito-de-compras-48.png"))); // NOI18N
+        jbAgregar.setText("Agregar");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setText("Categoria:");
+
         jcbCategorias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcbCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,22 +138,11 @@ private DefaultTableModel modelo;
             }
         });
 
-        jbAgregar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jbAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/icons8-carrito-de-compras-48.png"))); // NOI18N
-        jbAgregar.setText("Agregar");
-        jbAgregar.setEnabled(false);
-        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbAgregarActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Nombre:");
 
-        jtfNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jtfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jtfNombreFocusLost(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setText("Precio($):");
 
         jtfPrecio.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jtfPrecio.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -143,17 +151,15 @@ private DefaultTableModel modelo;
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Categoria:");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Nombre:");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Precio($):");
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Stock:");
+
+        jtfNombre.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jtfNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtfNombreFocusLost(evt);
+            }
+        });
 
         jsStock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -176,7 +182,7 @@ private DefaultTableModel modelo;
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jcbCategorias, 0, 160, Short.MAX_VALUE)
-                            .addComponent(jtfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(jtfPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +213,7 @@ private DefaultTableModel modelo;
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jsStock, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -243,9 +249,9 @@ private DefaultTableModel modelo;
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jdSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,13 +279,25 @@ private DefaultTableModel modelo;
     private void jcbCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriasActionPerformed
      activaCampos();
      jbAgregar.setEnabled(true);
-    
+     
     }//GEN-LAST:event_jcbCategoriasActionPerformed
 
     private void jtfNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNombreFocusLost
-        if(jtfNombre.getText().length()==0){
-        JOptionPane.showMessageDialog(this, "El nombre no debe estar vacio");
-        jtfNombre.requestFocus();
+//        if(jtfNombre.getText().length()==0){
+//        JOptionPane.showMessageDialog(this, "El nombre no debe estar vacio");
+//        jtfNombre.requestFocus();
+//        }
+        try {
+            if (jtfNombre.getText().length() == 0) {
+                JOptionPane.showMessageDialog(this, "El nombre no debe estar vacío");
+                jtfNombre.requestFocus();
+            }
+        } catch (NullPointerException e) {
+            // Manejar el caso en que jtfNombre sea nulo
+            JOptionPane.showMessageDialog(this, "El campo de texto 'Nombre' no está inicializado.");
+        } catch (Exception e) {
+            // Capturar cualquier otra excepción no esperada
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado: " + e.getMessage());
         }
     }//GEN-LAST:event_jtfNombreFocusLost
 
@@ -305,6 +323,13 @@ private DefaultTableModel modelo;
         desactivaCampos();
         
     }//GEN-LAST:event_jbAgregarActionPerformed
+
+    private void jdSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdSalirMouseEntered
+         
+        // Acción a realizar cuando el ratón sale del botón
+        // Restaurar el color original o aplicar otro efecto
+        jdSalir.setBackground(Color.LIGHT_GRAY); // Ejemplo de restaurar el color
+    }//GEN-LAST:event_jdSalirMouseEntered
 
     /**
      * @param args the command line arguments
@@ -349,14 +374,14 @@ private DefaultTableModel modelo;
             
         }
     private void activaCampos(){
-//    jcbCategorias.setEnabled(true);
+
     jtfNombre.setEnabled(true);
     jtfPrecio.setEnabled(true);
     jsStock.setEnabled(true);
     }
     private void desactivaCampos(){
-//    jcbCategorias.setEnabled(false);
 
+    jbAgregar.setEnabled(false);
     jtfNombre.setEnabled(false);
     jtfPrecio.setEnabled(false);
     jsStock.setEnabled(false);
