@@ -283,10 +283,7 @@ private DefaultTableModel modelo;
     }//GEN-LAST:event_jcbCategoriasActionPerformed
 
     private void jtfNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfNombreFocusLost
-//        if(jtfNombre.getText().length()==0){
-//        JOptionPane.showMessageDialog(this, "El nombre no debe estar vacio");
-//        jtfNombre.requestFocus();
-//        }
+
         try {
             if (jtfNombre.getText().length() == 0) {
                 JOptionPane.showMessageDialog(this, "El nombre no debe estar vacío");
@@ -302,16 +299,21 @@ private DefaultTableModel modelo;
     }//GEN-LAST:event_jtfNombreFocusLost
 
     private void jtfPrecioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtfPrecioFocusLost
-       try{
-           String precio=jtfPrecio.getText();
-           double prec=Double.parseDouble(precio);
-            }catch (NumberFormatException nf){
-        JOptionPane.showMessageDialog(this, "Debe ingresar un precio válido.");
-        jtfPrecio.requestFocus();
+
+        String precio = jtfPrecio.getText();
+        if (!precio.isEmpty()) {
+            try {
+                double prec = Double.parseDouble(precio);    
+            } catch (NumberFormatException nf) {    
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe ingresar un precio válido.");
+            jtfPrecio.requestFocus();
+        }
     }//GEN-LAST:event_jtfPrecioFocusLost
 
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        try {
         Producto pn= new Producto();
         pn.setDescripcion(jtfNombre.getText());
         pn.setPrecio(Double.parseDouble(jtfPrecio.getText()));
@@ -321,7 +323,14 @@ private DefaultTableModel modelo;
         llenarTabla();
         limpiaCampos();
         desactivaCampos();
-        
+        } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.");
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Uno de los campos está vacío.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage());
+
+    }
     }//GEN-LAST:event_jbAgregarActionPerformed
 
     private void jdSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdSalirMouseEntered
